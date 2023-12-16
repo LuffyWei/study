@@ -21,7 +21,7 @@
 
         <dependency>
             <groupId>com.study</groupId>
-            <artifactId>core-service</artifactId>
+            <artifactId>service</artifactId>
         </dependency>
         <dependency>
             <groupId>com.study</groupId>

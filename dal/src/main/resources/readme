@@ -1,0 +1,16 @@
+mybatis核心配置文件中的标签必须按照固定的顺序(有的标签可以不写，但顺序一定不能乱)：
+configuration（配置）
+    properties（属性）
+    settings（设置）
+    typeAliases（类型别名）
+    typeHandlers（类型处理器）
+    objectFactory（对象工厂）
+    plugins（插件）
+    environments（环境配置）
+        environment
+            transactionManager（事务管理器）
+            dataSource（数据源）
+    databaseIdProvider（数据库厂商标识）
+    mappers（映射器）
+
+必须注意：Mybatis配置文件的属性位置顺序是 固定 的，不允许 颠倒顺序，否则 Mybatis 在解析 XML 文件的时候就会抛出异常，这个与 Mybatis 框架启动加载配置信息顺序有关，后续我们源码分析会讲到。

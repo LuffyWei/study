@@ -1,0 +1,40 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<beans xmlns="http://www.springframework.org/schema/beans"-->
+<!--       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"-->
+<!--       xsi:schemaLocation="http://www.springframework.org/schema/beans-->
+<!--       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">-->
+
+<!--    <bean id="myDataSource" class="com.alibaba.druid.pool.DruidDataSource">-->
+<!--        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+<!--        <property name="url"  value="jdbc:mysql://localhost:3306/weixun?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8&amp;useSSL=false&amp;allowMultiQueries=true"/>-->
+<!--        <property name="username" value="root"/>-->
+<!--        <property name="password" value="123456"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+<!--        <property name="dataSource" ref="myDataSource"/>-->
+<!--        <property name="configLocation" value="mybatis-config.xml"/>-->
+<!--        <property name="mapperLocations">-->
+<!--            <list>-->
+<!--                <value>classpath*:mapper</value>-->
+<!--            </list>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+<!--    <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+<!--        <property name="sqlSessionFactoryBeanName" value="mySqlSessionFactory"/>-->
+<!--        <property name="basePackage" value="com.study.dal.mapper"/>-->
+<!--    </bean>-->
+
+<!--    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+<!--        <property name="dataSource" ref="myDataSource"/>-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash;  支持注解  &ndash;&gt;-->
+<!--    <tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+<!--    &lt;!&ndash;  灵活事务模板 &ndash;&gt;-->
+<!--    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">-->
+<!--        <property name="transactionManager" ref="transactionManager"/>-->
+<!--    </bean>-->
+<!--</beans>-->

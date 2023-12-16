@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.study.dal.mapper.UserInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.study.dal.mapper.object.UserInfoDO">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="createdAt" column="created_at" jdbcType="TIMESTAMP"/>
+            <result property="updatedAt" column="updated_at" jdbcType="TIMESTAMP"/>
+            <result property="isActive" column="is_active" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,`name`,remark,created_at,updated_at,is_active
+    </sql>
+
+    <sql id="Column_List">
+        name,remark
+    </sql>
+
+    <sql id="condition_sql">
+        <where>
+            and is_active = 1
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="ids != null and ids.size()>0">
+                and id in
+                <foreach collection="ids" item="item" index="index" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="name != null and name != ''">
+                and name like CONCAT('%', #{name}, '%')
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into user_info
+        (<include refid='Column_List'/>)
+        values(#{userName},#{userPassword})
+    </insert>
+
+    <insert id="batchInsert" useGeneratedKeys="true" keyProperty="id">
+        insert into user_info
+        (<include refid='Column_List'/>)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.userName},#{item.userPassword})
+        </foreach>
+    </insert>
+
+    <update id="update">
+        update user_info
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name}
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <update id="batchUpdate" parameterType="java.util.List">
+        update user_info
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="name =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id=#{item.id} then #{item.name}
+                </foreach>
+            </trim>
+            <trim prefix="remark =case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id=#{item.id} then #{item.remark}
+                </foreach>
+            </trim>
+        </trim>
+        <where>
+            and id in
+            <foreach collection="list" item="item" index="index" separator="," open="(" close=")">
+                #{item.id}
+            </foreach>
+        </where>
+    </update>
+
+    <update id="deleteById" parameterType="java.lang.Long">
+        update user_info
+        set is_active = 0
+        where id=#{id}
+            and is_active=1
+    </update>
+
+
+    <select id="selectByCondition" resultMap="BaseResultMap">
+        select
+            <include refid="Base_Column_List"/>
+        from user_info
+        <include refid="condition_sql"/>
+        <if test="offset !=null and limit !=null">
+            limit #{offset} #{limit}
+        </if>
+    </select>
+</mapper>
