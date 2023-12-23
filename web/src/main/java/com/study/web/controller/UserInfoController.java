@@ -14,13 +14,18 @@ public class UserInfoController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/create1")
+    @RequestMapping("/create")
     public String createUser(@RequestParam("name") String name, @RequestParam("remark") String remark) {
-        UserInfoDO userInfoDO = new UserInfoDO();
-        userInfoDO.setName(name);
-        userInfoDO.setRemark(remark);
-        userService.createUser(userInfoDO);
-        return "用户信息创建成功；信息="+ JSON.toJSONString(userInfoDO);
+        try {
+            UserInfoDO userInfoDO = new UserInfoDO();
+            userInfoDO.setName(name);
+            userInfoDO.setRemark(remark);
+            userService.createUser(userInfoDO);
+            return "用户信息创建成功；信息="+ JSON.toJSONString(userInfoDO);
+        } catch (Throwable e) {
+            return "用户信息创建失败，"+ e.getMessage();
+        }
+
     }
 
     @RequestMapping("/create2")

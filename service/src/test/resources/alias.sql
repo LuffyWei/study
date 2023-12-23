@@ -1,0 +1,2 @@
+create ALIAS if not exists "ST_ASTEXT" FOR "com.study.config.H2CustomFunction.ST_AsText"
+create ALIAS if not exists "ST_MULTIPOLYGONFROMTEXT" FOR "com.study.config.H2CustomFunction.ST_MultiPolygonFromText"

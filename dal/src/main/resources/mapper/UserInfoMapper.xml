@@ -42,7 +42,7 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into user_info
         (<include refid='Column_List'/>)
-        values(#{userName},#{userPassword})
+        values(#{name},#{remark})
     </insert>
 
     <insert id="batchInsert" useGeneratedKeys="true" keyProperty="id">
@@ -50,7 +50,7 @@
         (<include refid='Column_List'/>)
         values
         <foreach collection="list" item="item" separator=",">
-            (#{item.userName},#{item.userPassword})
+            (#{item.name},#{item.remark})
         </foreach>
     </insert>
 

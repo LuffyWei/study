@@ -11,4 +11,6 @@ public interface UserService {
     int deleteUser(Long userId);
 
     UserInfoDO queryById(Long id);
+
+    UserInfoDO queryByName(String name);
 }
